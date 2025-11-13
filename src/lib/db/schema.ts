@@ -1,4 +1,6 @@
-import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
+
+import { relations } from "drizzle-orm";
+import { pgTable, text, timestamp, boolean, serial, uuid, integer } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -65,3 +67,69 @@ export const verification = pgTable("verification", {
     .$onUpdate(() => /* @__PURE__ */ new Date())
     .notNull(),
 });
+
+
+
+// category table
+export const category = pgTable('category', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull().unique(),
+  createdAt: timestamp('created_at').$defaultFn(() => new Date()).notNull(),
+});
+
+// assets table
+export const assets = pgTable('assets', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  title: text('title').notNull(),
+  description: text('description'),
+  fileUrl: text('file_url').notNull(),
+  thumbnailUrl: text('thumbnail_url'), // ✅ fixed typo (was thumbanil_url)
+  isApproved: text('is_approved').default('pending').notNull(),
+  userId: text('user_id')
+    .notNull()
+    .references(() => user.id, { onDelete: 'cascade' }),
+  categoryId: integer('category_id').references(() => category.id),
+  createdAt: timestamp('created_at').$defaultFn(() => new Date()).notNull(),
+  updatedAt: timestamp('updated_at').$defaultFn(() => new Date()).notNull(),
+});
+
+
+// user relations
+export const userRelations = relations(user, ({ many }) => ({
+  sessions: many(session),
+  accounts: many(account),
+  assets: many(assets),
+}));
+
+// session relations
+export const sessionRelations = relations(session, ({ one }) => ({
+  user: one(user, {
+    fields: [session.userId],
+    references: [user.id],
+  }),
+}));
+
+// account relations
+export const accountRelations = relations(account, ({ one }) => ({
+  user: one(user, {
+    fields: [account.userId],
+    references: [user.id],
+  }),
+}));
+
+// ✅ category relations (1 category → many assets)
+export const categoryRelations = relations(category, ({ many }) => ({
+  assets: many(assets),
+}));
+
+// ✅ assets relations (1 asset → 1 user, 1 category)
+export const assetsRelations = relations(assets, ({ one }) => ({
+  user: one(user, {
+    fields: [assets.userId],
+    references: [user.id],
+  }),
+  category: one(category, {
+    fields: [assets.categoryId],
+    references: [category.id],
+  }),
+}));

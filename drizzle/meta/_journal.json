@@ -8,6 +8,13 @@
       "when": 1763025484574,
       "tag": "0000_puzzling_night_thrasher",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1763053571075,
+      "tag": "0001_talented_nighthawk",
+      "breakpoints": true
     }
   ]
 }
