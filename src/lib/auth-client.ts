@@ -10,6 +10,7 @@ export const authClient = createAuthClient({
     }),
     // আরও plugin দরকার হলে এখানে add করো
   ],
+  
 });
 
 

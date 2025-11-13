@@ -2,10 +2,20 @@
 
 import Image from "next/image";
 import { Button } from "../ui/button";
+import { signIn } from "@/lib/auth-client";
+
 
 export default function LoginButton() {
+
+  const handleLogin = async() =>{
+     const data = await signIn.social({
+        provider: "google",
+        callbackURL : "/"
+      });
+  }
   return (
     <Button
+      onClick={handleLogin}
       className="w-full flex items-center cursor-pointer justify-center gap-2 bg-teal-500 hover:bg-teal-400 text-white font-medium py-2"
     >
       <Image
