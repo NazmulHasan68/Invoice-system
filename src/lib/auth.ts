@@ -13,7 +13,7 @@ export const auth = betterAuth({
   socialProviders: {
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_SECRET_ID as string, // fixed typo
+      clientSecret: process.env.GOOGLE_SECRET_ID as string, 
       mapProfileToUser: (profile: { name: string; email: string; picture: string }) => ({
         name: profile.name,
         email: profile.email,

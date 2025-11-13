@@ -17,10 +17,27 @@ import {
 } from '../ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 
+
+type AuthUser = {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  email: string;
+  emailVerified: boolean;
+  name: string;
+  image?: string | null;
+  role: "admin" | "user";
+};
+
 export default function Header() {
-  const { data: session, isPending } = useSession();
-  const user = session?.user;
-  const isAdminUser = user?.role === 'admin';
+
+    const { data: session, isPending } = useSession();
+    const user = session?.user as AuthUser; 
+    console.log(user);
+    
+    const isAdminUser = user?.role === "admin";
+
+
   const pathName = usePathname();
   const router = useRouter();
   const isLoginPage: boolean = pathName === '/login';
