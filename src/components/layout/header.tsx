@@ -33,9 +33,12 @@ export default function Header() {
 
     const { data: session, isPending } = useSession();
     const user = session?.user as AuthUser; 
-    console.log(user);
+    console.log(session);
     
     const isAdminUser = user?.role === "admin";
+
+   console.log(isAdminUser);
+   
 
 
   const pathName = usePathname();
@@ -70,80 +73,85 @@ export default function Header() {
           </span>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-6">
-          <Link href="/gallery" className="text-sm font-medium hover:text-teal-600 transition-colors">
-            Gallery
-          </Link>
-
-          {!isPending && user && !isAdminUser && (
-            <>
-              <Link href="/user-dashboard/assets" className="text-sm font-medium hover:text-teal-600 transition-colors">
-                Assets
+        <div className=' flex justify-between items-center gap-6'>
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-6">
+            {
+              !isPending && user && isAdminUser  ? null :
+              <Link href="/gallery" className="text-sm font-medium hover:text-teal-600 transition-colors">
+                Gallery
               </Link>
-              <Link href="/user-dashboard/purchases" className="text-sm font-medium hover:text-teal-600 transition-colors">
-                Purchases
+            }
+
+            {!isPending && user && !isAdminUser && (
+              <>
+                <Link href="/user-dashboard/assets" className="text-sm font-medium hover:text-teal-600 transition-colors">
+                  Assets
+                </Link>
+                <Link href="/user-dashboard/purchases" className="text-sm font-medium hover:text-teal-600 transition-colors">
+                  Purchases
+                </Link>
+              </>
+            )}
+
+            {!isPending && user && isAdminUser && (
+              <>
+                <Link href="/admin-dashboard/asset-approval" className="text-sm font-medium hover:text-teal-600 transition-colors">
+                  Asset Approval
+                </Link>
+                <Link href="/admin-dashboard/settings" className="text-sm font-medium hover:text-teal-600 transition-colors">
+                  Settings
+                </Link>
+              </>
+            )}
+          </nav>
+
+          {/* Right: Profile / Login */}
+          <div className="flex items-center gap-4">
+            {isPending ? null : user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-9 w-9 rounded-full p-0">
+                    <Avatar className="h-9 w-9">
+                      <AvatarImage src={user.image || ''} alt={user.name || 'User'} />
+                      <AvatarFallback>
+                        {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
+                      </AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+
+                <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuLabel>
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">{user?.name}</p>
+                      <p className="text-xs text-gray-500 truncate">{user?.email}</p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={handleLogout}
+                    className="cursor-pointer flex items-center gap-2 text-red-600 hover:text-red-700"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    <span>Logout</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link href="/login">
+                <Button className="bg-teal-500 hover:bg-teal-600 text-white">Login</Button>
               </Link>
-            </>
-          )}
+            )}
 
-          {!isPending && user && isAdminUser && (
-            <>
-              <Link href="/admin-dashboard/asset-approval" className="text-sm font-medium hover:text-teal-600 transition-colors">
-                Asset Approval
-              </Link>
-              <Link href="/admin-dashboard/settings" className="text-sm font-medium hover:text-teal-600 transition-colors">
-                Settings
-              </Link>
-            </>
-          )}
-        </nav>
-
-        {/* Right: Profile / Login */}
-        <div className="flex items-center gap-4">
-          {isPending ? null : user ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-9 w-9 rounded-full p-0">
-                  <Avatar className="h-9 w-9">
-                    <AvatarImage src={user.image || ''} alt={user.name || 'User'} />
-                    <AvatarFallback>
-                      {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
-                    </AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-
-              <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuLabel>
-                  <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">{user?.name}</p>
-                    <p className="text-xs text-gray-500 truncate">{user?.email}</p>
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onClick={handleLogout}
-                  className="cursor-pointer flex items-center gap-2 text-red-600 hover:text-red-700"
-                >
-                  <LogOut className="h-4 w-4" />
-                  <span>Logout</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ) : (
-            <Link href="/login">
-              <Button className="bg-teal-500 hover:bg-teal-600 text-white">Login</Button>
-            </Link>
-          )}
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 rounded-md hover:bg-gray-100 transition"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden p-2 rounded-md hover:bg-gray-100 transition"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
       </div>
 

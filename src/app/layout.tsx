@@ -29,7 +29,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header/>
-        {children}
+        <main className="mt-16 py-2">
+          {children}
+        </main>
       </body>
     </html>
   );
