@@ -4,45 +4,43 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Users } from "lucide-react";
 
 export default async function Settings() {
-  const [categories, userCountData] = await Promise.all([
+  const [categories, userCount] = await Promise.all([
     getAllCategoryActions(),
     getTotalUsersCountAction(),
   ]);
 
-  const totalUsers =
-    typeof userCountData === "object" && "totalUsers" in userCountData
-      ? userCountData.totalUsers
-      : userCountData;
+
 
   return (
     <div className="container py-10">
       <h1 className="text-3xl font-bold mb-5">Admin Settings</h1>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 mb-7">
+        
+        {/* Total Users */}
         <Card className="bg-white">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center text-lg font-medium">
               <Users className="mr-2 h-5 w-5 text-teal-500" />
               Total Users
             </CardTitle>
-            <CardDescription>All registered users on the platform</CardDescription>
+            <CardDescription>All registered users</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-3xl font-bold text-teal-500">
-              {typeof totalUsers === "number"
-                ? totalUsers
-                :  "N/A"}
+              {userCount?.totalUsers ?? 0}
             </p>
           </CardContent>
         </Card>
 
+        {/* Total Assets */}
         <Card className="bg-white">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center text-lg font-medium">
               <Users className="mr-2 h-5 w-5 text-teal-500" />
               Total Assets
             </CardTitle>
-            <CardDescription>All uploaded Assets</CardDescription>
+            <CardDescription>Uploaded files & media</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-3xl font-bold text-teal-500">100</p>
@@ -50,6 +48,7 @@ export default async function Settings() {
         </Card>
       </div>
 
+      {/* Category Manager */}
       <Card>
         <CardHeader>
           <CardTitle>Category Management</CardTitle>

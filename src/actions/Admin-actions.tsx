@@ -102,9 +102,10 @@ export async function getTotalUsersCountAction() {
       .select({ count: sql<number>`COUNT(*)` })
       .from(user)
 
-    const totalUsers = result[0]?.count ?? 0
+    const totalUsers = result[0]?.count ?? 0;
 
-    return 0
+    return { success: true, totalUsers };
+    
   } catch (error) {
     console.error('getTotalUsersCount Error:', error)
     return {
