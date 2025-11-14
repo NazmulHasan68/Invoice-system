@@ -10,6 +10,8 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { uploadAssetAction } from "@/actions/dhaboard-actions";
+import { toast } from "sonner";
 
 type Category = { id: number; name: string; createdAt: Date; };
 interface UploadDialogProps { categories: Category[] }
@@ -92,10 +94,23 @@ export default function UploadAsset({ categories }: UploadDialogProps) {
       const cloudResponse = await uploadPromise;
       console.log("Cloudinary Response:", cloudResponse);
 
-      // TODO: Send `cloudResponse.secure_url` + formState.title/description/categoryId to your DB
-      alert("Uploaded Successfully: " + cloudResponse.secure_url);
-      setOpen(false);
-      setFormState({ title: "", description: "", categoryId: "", file: null });
+      const formData = new FormData()
+      formData.append('title', formState.title)
+      formData.append('description', formState.description)
+      formData.append('categoryId', formState.categoryId)
+      formData.append('fileUrl', cloudResponse.secure_url)
+      formData.append('thumbnailUrl', cloudResponse.secure_url)
+
+      try {
+        
+          await uploadAssetAction(formData)
+          toast.success("Upload successfull")
+          
+          setOpen(false);
+          setFormState({ title: "", description: "", categoryId: "", file: null });
+      } catch (error) {
+        console.log(error);
+      }
 
     } catch (error) {
       console.error(error);

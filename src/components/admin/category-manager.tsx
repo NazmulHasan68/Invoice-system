@@ -46,7 +46,7 @@ export default function CategoryManager({ categories: initialCategories }: Categ
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 ">
       {/* Add Category */}
       <form onSubmit={handleAddNewCategory} className="space-y-4">
         <label htmlFor="categoryName" className="text-sm font-medium">

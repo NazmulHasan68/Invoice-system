@@ -2,11 +2,11 @@
 
 import { auth } from '@/lib/auth'
 import { db } from '@/lib/db'
-import { category, user } from '@/lib/db/schema'
+import { assets, category, user } from '@/lib/db/schema'
 import { eq, sql } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
-import { z } from 'zod'
+import {   z } from 'zod'
 
 /* ------------------------------------------
    ✅ Category Schema (Validation)
@@ -140,4 +140,118 @@ export async function deleteCategoryActions(categoryId:number) {
       message: 'Failed to delete category',
     } 
     }
+}
+
+
+/* ------------------------------------------
+   ✅ Get All Assets
+--------------------------------------------- */
+export async function getTotalAssetsAction() {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    })
+
+    if (!session?.user || session.user.role !== 'admin') {
+      throw new Error('You must be an admin to access this data')
+    }
+
+    const result = await db
+      .select({ count: sql<number>`COUNT(*)` })
+      .from(assets)
+
+    const totalAsset = result[0]?.count ?? 0;
+
+    return { success: true, totalAsset };
+    
+  } catch (error) {
+    console.error('getTotalUsersCount Error:', error)
+    return {
+      success: false,
+      message: 'Failed to fetch user count.',
+    }
+  }
+}
+
+
+export async function approvedAssetAction(assetId: string) {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    })
+
+    if (!session?.user || session.user.role !== 'admin') {
+      throw new Error('You must be an admin to Approved this Data')
+    }
+
+    try {
+      await db.update(assets).set({isApproved : 'approved' , updatedAt : new Date()}).where(eq(assets.id , assetId))
+      revalidatePath('/admin-dashboard/asset-approval')
+      return{
+        success : true
+      }
+    } catch (error) {
+      console.log(error);
+      
+      return {
+        success : false
+      }
+    }
+}
+
+
+export async function rejectAssetAction(assetId: string) {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    })
+
+    if (!session?.user || session.user.role !== 'admin') {
+      throw new Error('You must be an admin to Reject this data')
+    }
+
+    try {
+      await db.update(assets).set({isApproved : 'rejected' , updatedAt : new Date()}).where(eq(assets.id , assetId))
+      revalidatePath('/admin-dashboard/asset-approval')
+       return{
+        success : true
+      }
+    } catch (error) {
+      console.log(error);
+      
+      return {
+        success : false
+      }
+    }
+}
+
+
+
+export async function getPendingAssetsAction() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session?.user || session.user.role !== 'admin') {
+    throw new Error('You must be an admin to review assets');
+  }
+
+  try {
+    const pendingAssets = await db.select({
+        assets :assets,
+        userName: user.name,
+      })
+      .from(assets)
+      .leftJoin(user, eq(assets.userId, user.id))
+      .where(eq(assets.isApproved, 'pending'));
+
+    return pendingAssets; // সবসময় array
+  } catch (error) {
+    console.error('getPendingAssetsAction Error:', error);
+    return []; // catch-এও empty array return
+  }
+}
+
+
+
+export async function getPublicAsset() {
+  
 }

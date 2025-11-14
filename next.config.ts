@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   images: {
-    domains: ["upload.wikimedia.org"], // ✅ এখানে তোমার ডোমেইন যুক্ত হলো
+    domains: ["upload.wikimedia.org","res.cloudinary.com"], // ✅ এখানে তোমার ডোমেইন যুক্ত হলো
   },
 };
 
