@@ -252,30 +252,34 @@ export async function getPendingAssetsAction() {
 
 
 
-export async function getPublicAsset(categoryId?:number) {
+export async function getPublicAsset(categoryId?: number) {
   try {
- 
-   let condition = eq(assets.isApproved, "approved");
+    const conditions = [
+      eq(assets.isApproved, "approved")
+    ];
 
-  if (categoryId) {
-    condition = and(condition, eq(assets.categoryId, categoryId));
-  }
+    if (categoryId) {
+      conditions.push(eq(assets.categoryId, categoryId));
+    }
 
-    const query = await db.select({
-      assets : assets,
-      categoryName : category.name,
-      userName : user.name
-    }).from(assets)
-        .leftJoin(category, eq(assets.categoryId, category.id))
-        .leftJoin(user, eq(assets.userId, user.id))
-        .where(condition)
+    const query = await db
+      .select({
+        assets: assets,
+        categoryName: category.name,
+        userName: user.name,
+      })
+      .from(assets)
+      .leftJoin(category, eq(assets.categoryId, category.id))
+      .leftJoin(user, eq(assets.userId, user.id))
+      .where(and(...conditions)); // 👈 this is allowed
 
-      return query
+    return query;
   } catch (error) {
     console.log(error);
-    return []
+    return [];
   }
 }
+
 
 
 export async function getAssetByIdActions(assetId:string) {
