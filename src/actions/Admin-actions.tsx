@@ -3,7 +3,7 @@
 import { auth } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { assets, category, user } from '@/lib/db/schema'
-import { eq, sql } from 'drizzle-orm'
+import { and, eq, sql } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
 import {   z } from 'zod'
@@ -252,6 +252,49 @@ export async function getPendingAssetsAction() {
 
 
 
-export async function getPublicAsset() {
-  
+export async function getPublicAsset(categoryId?:number) {
+  try {
+ 
+   let condition = eq(assets.isApproved, "approved");
+
+  if (categoryId) {
+    condition = and(condition, eq(assets.categoryId, categoryId));
+  }
+
+    const query = await db.select({
+      assets : assets,
+      categoryName : category.name,
+      userName : user.name
+    }).from(assets)
+        .leftJoin(category, eq(assets.categoryId, category.id))
+        .leftJoin(user, eq(assets.userId, user.id))
+        .where(condition)
+
+      return query
+  } catch (error) {
+    console.log(error);
+    return []
+  }
+}
+
+
+export async function getAssetByIdActions(assetId:string) {
+  try {
+    const [result] = await db.select({
+      assets : assets,
+      categoryName :category.name,
+      userName : user.name,
+      userImage : user.image,
+      userId : user.id
+    }).from(assets)
+       .leftJoin(category, eq(assets.categoryId, category.id))
+        .leftJoin(user, eq(assets.userId, user.id))
+         .where(eq(assets.id, assetId))
+    
+    return result
+  } catch (error) {
+    console.log(error);
+    
+    return null
+  }
 }
