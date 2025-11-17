@@ -137,7 +137,7 @@ export async function deleteCategoryActions(categoryId:number) {
        console.error('delete category Error:', error)
     return {
       success: false,
-      message: 'Failed to delete category',
+      message: 'Failed to delete category s',
     } 
     }
 }
