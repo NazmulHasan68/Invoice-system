@@ -8,6 +8,7 @@ import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
 import {  z } from 'zod'
 
+
 /* ------------------------------------------
    ✅ Category Schema (Validation)
 --------------------------------------------- */
@@ -90,9 +91,8 @@ export async function getAllCategoryActions() {
 --------------------------------------------- */
 export async function getTotalUsersCountAction() {
   try {
-    const session = await auth.api.getSession({
-      headers: await headers(),
-    })
+    const session = await auth.api.getSession({ headers: await headers() });
+
 
     if (!session?.user || session.user.role !== 'admin') {
       throw new Error('You must be an admin to access this data')
@@ -148,9 +148,8 @@ export async function deleteCategoryActions(categoryId:number) {
 --------------------------------------------- */
 export async function getTotalAssetsAction() {
   try {
-    const session = await auth.api.getSession({
-      headers: await headers(),
-    })
+    const session = await auth.api.getSession({ headers: await headers() });
+
 
     if (!session?.user || session.user.role !== 'admin') {
       throw new Error('You must be an admin to access this data')
