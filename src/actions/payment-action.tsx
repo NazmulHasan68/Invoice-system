@@ -43,7 +43,7 @@ export async function createStripeCheckout(assetId: string) {
         price_data: {
           currency: "usd",
           product_data: { name: asset.title },
-          unit_amount: Math.round(asset.price * 100), // price in cents
+          unit_amount: Math.round(100 * 100), // price in cents
         },
         quantity: 1,
       },
