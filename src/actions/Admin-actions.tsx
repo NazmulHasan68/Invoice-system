@@ -6,7 +6,7 @@ import { assets, category, user } from '@/lib/db/schema'
 import { and, eq, sql } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
-import {   z } from 'zod'
+import {  z } from 'zod'
 
 /* ------------------------------------------
    ✅ Category Schema (Validation)
@@ -161,8 +161,8 @@ export async function getTotalAssetsAction() {
       .from(assets)
 
     const totalAsset = result[0]?.count ?? 0;
-
     return { success: true, totalAsset };
+
     
   } catch (error) {
     console.error('getTotalUsersCount Error:', error)

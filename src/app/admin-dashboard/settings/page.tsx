@@ -4,7 +4,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Users } from "lucide-react";
 
 export default async function Settings() {
-  const [categories, userCount, useAssetsCount] = await Promise.all([
+
+  const [categories, userCount, assetsCount] = await Promise.all([
     getAllCategoryActions(),
     getTotalUsersCountAction(),
     getTotalAssetsAction()
@@ -44,7 +45,7 @@ export default async function Settings() {
             <CardDescription>Uploaded files & media</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-3xl font-bold text-teal-500">{useAssetsCount?.totalAsset ?? 0}</p>
+            <p className="text-3xl font-bold text-teal-500">{assetsCount?.totalAsset ?? 0}</p>
           </CardContent>
         </Card>
       </div>
