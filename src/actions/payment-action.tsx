@@ -1,32 +1,31 @@
-'use server'
-
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { assets, purchase } from "@/lib/db/schema";
-import { and, eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { headers } from "next/headers";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-10-29.clover"
+  apiVersion: "2025-10-29.clover",
 });
 
 export async function createStripeCheckout(assetId: string) {
-  // 1️⃣ Session check
+  // 1️⃣ Validate user session
   const session = await auth.api.getSession({
-    headers: await headers()
+    headers: await headers(),
   });
 
   if (!session?.user) {
     throw new Error("You must be logged in to purchase");
   }
 
-  // 2️⃣ Fetch asset
+  // 2️⃣ Fetch the asset
   const [asset] = await db.select().from(assets).where(eq(assets.id, assetId));
   if (!asset) throw new Error("Asset not found");
 
   // 3️⃣ Check if user already purchased
-  const existing = await db.select()
+  const existing = await db
+    .select()
     .from(purchase)
     .where(and(eq(purchase.assetId, assetId), eq(purchase.userId, session.user.id)))
     .limit(1);
@@ -44,7 +43,7 @@ export async function createStripeCheckout(assetId: string) {
         price_data: {
           currency: "usd",
           product_data: { name: asset.title },
-          unit_amount:  200, // price in cents
+          unit_amount: Math.round(asset.price * 100), // price in cents
         },
         quantity: 1,
       },

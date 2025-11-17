@@ -19,6 +19,10 @@ export default async function Login() {
     headers : await headers()
   })
   if(session) redirect("/")
+    console.log(process.env.BETTER_AUTH_SECRET);
+    console.log(process.env.GOOGLE_CLIENT_ID);
+    console.log(process.env.GOOGLE_CLIENT_SECRET);
+    
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
       <Card className="w-full max-w-md shadow-lg border-t-4 border-teal-500">
