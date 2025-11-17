@@ -4,16 +4,18 @@ import { admin } from "better-auth/plugins";
 import { db } from "./db";
 import { nextCookies } from "better-auth/next-js";
 
-const adminRole = 'admin';
-const userRole = 'user';
+const adminRole = "admin";
+const userRole = "user";
 
 export const auth = betterAuth({
-  database: drizzleAdapter(db, { provider: 'pg' }),
+  secret: process.env.BETTER_AUTH_SECRET, // ✅ MUST HAVE!
+
+  database: drizzleAdapter(db, { provider: "pg" }),
 
   socialProviders: {
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_SECRET_ID as string, 
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string, // ✅ FIXED NAME
       mapProfileToUser: (profile: { name: string; email: string; picture: string }) => ({
         name: profile.name,
         email: profile.email,
