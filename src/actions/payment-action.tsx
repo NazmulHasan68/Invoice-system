@@ -16,7 +16,7 @@ export async function createStripeCheckout(assetId: string) {
   });
 
   if (!session?.user) {
-    throw new Error("You must be logged in to purchase");
+    throw new Error("You must be logged in to purchase a");
   }
 
   // 2️⃣ Fetch the asset
