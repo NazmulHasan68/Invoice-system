@@ -13,10 +13,10 @@ export default function Home() {
         </p>
         <div className="flex gap-4">
           <button className="px-6 py-3 bg-black text-white rounded-xl text-lg font-semibold hover:bg-gray-800 transition">
-            Create Invoice
+            Create Invoice Now
           </button>
           <button className="px-6 py-3 bg-gray-200 text-gray-900 rounded-xl text-lg font-semibold hover:bg-gray-300 transition">
-            Sign Up Free
+            Sign Up Free 
           </button>
         </div>
       </section>
