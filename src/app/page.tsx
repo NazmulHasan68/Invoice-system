@@ -53,7 +53,7 @@ export default function Home() {
           <p className="text-gray-600 text-lg leading-relaxed">
             We are committed to providing a fast, simple, and reliable invoicing solution
             for freelancers, startups, and growing businesses. Our goal is to help you save
-            time, stay organized, and manage your billing effortlessly. fgh fgh fgh fg
+            time, stay organized, and manage your billing effortlessly. fgh fgh fgh fg sdf sd
           </p>
         </div>
       </section>
