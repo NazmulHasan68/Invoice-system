@@ -49,7 +49,7 @@ export default async function Settings() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Category Management</CardTitle>
+          <CardTitle>Category Management sdfsd </CardTitle>
         </CardHeader>
         <CardContent>
           <CategoryManager categories={Array.isArray(categories) ? categories : []} />
