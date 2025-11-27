@@ -15,7 +15,7 @@ export default async function Settings() {
 
   return (
     <div className="container py-10">
-      <h1 className="text-3xl font-bold mb-5">Admin Settings</h1>
+      <h1 className="text-3xl font-bold mb-5">Admin Setting s</h1>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 mb-7">
         <Card className="bg-white">
