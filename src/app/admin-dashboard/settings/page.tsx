@@ -39,7 +39,7 @@ export default async function Settings() {
               <Folder className="mr-2 h-5 w-5 text-teal-500" />
               Total Assets
             </CardTitle>
-            <CardDescription>Uploaded files & media df </CardDescription>
+            <CardDescription>Uploaded files & media </CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-3xl font-bold text-teal-500">{assetsCount?.totalAsset ?? 0}</p>
@@ -49,7 +49,7 @@ export default async function Settings() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Category Management </CardTitle>
+          <CardTitle>Category Management ssdfsd</CardTitle>
         </CardHeader>
         <CardContent>
           <CategoryManager categories={Array.isArray(categories) ? categories : []} />
