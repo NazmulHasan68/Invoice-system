@@ -24,7 +24,7 @@ export default async function Settings() {
               <Users className="mr-2 h-5 w-5 text-teal-500" />
               Total Users
             </CardTitle>
-            <CardDescription>All registered  users asd</CardDescription>
+            <CardDescription>All registered  users </CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-3xl font-bold text-teal-500">
