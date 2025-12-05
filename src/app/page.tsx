@@ -89,7 +89,7 @@ export default function Home() {
 
       {/* Bottom CTA */}
       <section className="py-16 bg-white text-center">
-        <h2 className="text-3xl font-bold mb-4">Ready to Create Your Invoice? sdfsd</h2>
+        <h2 className="text-3xl font-bold mb-4">Ready to Create Your Invoice? </h2>
         <p className="text-gray-600 mb-8">
           Start creating fully professional invoices at zero cost.
         </p>
