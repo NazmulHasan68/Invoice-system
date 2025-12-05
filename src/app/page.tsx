@@ -6,10 +6,10 @@ export default function Home() {
       {/* Hero Section */}
       <section className="flex flex-col items-center text-center py-24 px-6 bg-white shadow-sm">
         <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 mb-4">
-          Create Professional Invoices in Minutes
+          Create Professional Invoices in Minutes 
         </h1>
         <p className="text-lg md:text-xl text-gray-600 max-w-2xl mb-8">
-          Fast, simple & secure invoicing for freelancers, startups, and businesses.
+          Fast, simple & secure invoicing for freelancers, startups, and .
         </p>
         <div className="flex gap-4">
           <button className="px-6 py-3 bg-black text-white rounded-xl text-lg font-semibold hover:bg-gray-800 transition">
@@ -39,7 +39,7 @@ export default function Home() {
             >
               <h3 className="text-xl font-semibold text-gray-800 mb-2">✔ {feature}</h3>
               <p className="text-gray-600 text-sm">
-                Easily manage and dfgd create smooth, professional invoices within seconds. dfsdf fasdfa
+                Easily manage and dfgd create smooth, professional invoices within seconds. 
               </p>
             </div>
           ))}

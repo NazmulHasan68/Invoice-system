@@ -15,7 +15,7 @@ export default async function Settings() {
 
   return (
     <div className="container py-10">
-      <h1 className="text-3xl font-bold mb-5">Admin Settingfgh</h1>
+      <h1 className="text-3xl font-bold mb-5">Admin Settingf</h1>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 mb-7">
         <Card className="bg-white">
@@ -39,7 +39,7 @@ export default async function Settings() {
               <Folder className="mr-2 h-5 w-5 text-teal-500" />
               Total Assets
             </CardTitle>
-            <CardDescription>Uploaded files & media </CardDescription>
+            <CardDescription>Uploaded files & media</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-3xl font-bold text-teal-500">{assetsCount?.totalAsset ?? 0}</p>
@@ -49,7 +49,7 @@ export default async function Settings() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Category Management </CardTitle>
+          <CardTitle>Category Managementj j </CardTitle>
         </CardHeader>
         <CardContent>
           <CategoryManager categories={Array.isArray(categories) ? categories : []} />
