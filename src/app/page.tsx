@@ -39,7 +39,7 @@ export default function Home() {
             >
               <h3 className="text-xl font-semibold text-gray-800 mb-2">✔ {feature}</h3>
               <p className="text-gray-600 text-sm">
-                Easily manage and dfgd create smooth, professional invoices within seconds. 
+                Easily manage and dfgd create smooth, asdf professional invoices within seconds. 
               </p>
             </div>
           ))}
