@@ -6,7 +6,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="flex flex-col items-center text-center py-24 px-6 bg-white shadow-sm">
         <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 mb-4">
-          Create Professional Invoices in Minutes 
+          Create Professional Invoices in Minutes  sdfs df
         </h1>
         <p className="text-lg md:text-xl text-gray-600 max-w-2xl mb-8">
           Fast, simple & secure invoicing for freelancers, startups, and .
