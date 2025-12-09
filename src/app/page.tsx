@@ -51,7 +51,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">About Us</h2>
           <p className="text-gray-600 text-lg leading-relaxed">
-            We are committed to providing a fast, simple, and reliable invoicing solution
+            We are committed to providing a fast, simple, and reliable invoicing solution asdfsd
             for freelancers, startups, and growing businesses. Our goal is to help you save
             time, stay organized, and manage yourasdf  billing effortlessly. fgh fgh fgh fg sdf sd
           </p>
