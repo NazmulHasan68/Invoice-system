@@ -55,7 +55,7 @@ export default async function GalleryDetailsPage({ params }: GalleryDetailsPageP
             </div>
             <div>
               <p className="text-sm font-medium">{userName}</p>
-              <p className="text-xs text-gray-500">Creator asdf  asdf asd</p>
+              <p className="text-xs text-gray-500">Creator asdf </p>
             </div>
           </div>
         </div>
