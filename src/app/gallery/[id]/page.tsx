@@ -55,7 +55,7 @@ export default async function GalleryDetailsPage({ params }: GalleryDetailsPageP
             </div>
             <div>
               <p className="text-sm font-medium">{userName}</p>
-              <p className="text-xs text-gray-500">Creator asdf </p>
+              <p className="text-xs text-gray-500">Creator  </p>
             </div>
           </div>
         </div>
@@ -64,7 +64,7 @@ export default async function GalleryDetailsPage({ params }: GalleryDetailsPageP
         <div className="space-y-6 sticky top-24">
           <Card className="overflow-hidden border-0 shadow-lg rounded-xl p-0">
             <div className="bg-linear-to-r from-gray-900 to-gray-800 p-6 text-white">
-              <h3 className="text-xl font-bold mb-2">Premium Asset asdfs fg</h3>
+              <h3 className="text-xl font-bold mb-2">Premium Asset</h3>
               <div>
                 <span className="text-3xl font-bold">$5</span>
                 <span className="ml-2 text-gray-300">One Time Purchase </span>
