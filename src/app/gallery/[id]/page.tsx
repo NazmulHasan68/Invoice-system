@@ -84,7 +84,7 @@ export default async function GalleryDetailsPage({ params }: GalleryDetailsPageP
                 ) : (
                   <Link href="/login">
                     <Card className="w-full bg-black text-white h-12 flex items-center justify-center">
-                      Sign In to Purchase
+                      Sign In to 
                     </Card>
                   </Link>
                 )}
