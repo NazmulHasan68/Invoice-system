@@ -67,7 +67,7 @@ export default async function GalleryDetailsPage({ params }: GalleryDetailsPageP
               <h3 className="text-xl font-bold mb-2">Premium Asset asdfs fg</h3>
               <div>
                 <span className="text-3xl font-bold">$5</span>
-                <span className="ml-2 text-gray-300">One Time Purchase sdfsd</span>
+                <span className="ml-2 text-gray-300">One Time Purchase </span>
               </div>
             </div>
             <CardContent className="p-4">
