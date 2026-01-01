@@ -76,7 +76,7 @@ export default async function GalleryDetailsPage({ params }: GalleryDetailsPageP
                   isAuthor ? (
                     <div className="bg-blue-50 text-blue-700 p-5 rounded-lg flex items-start gap-3">
                       <Info className="w-5 h-5 text-blue-500 mt-1 shrink-0 text-xs" />
-                      <p>This is your own asset.  You cannot purchase your own. kui </p>
+                      <p>This is your own asset.  You cannot purchase your own.  </p>
                     </div>
                   ) : (
                     <BuyAssets assetId={assets.id} />
